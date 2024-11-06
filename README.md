@@ -9,7 +9,7 @@ This project focuses on predicting **soil organic carbon (SOC)** levels across *
 3. **Database Integration**: Use PostGIS to organize and manage spatial and temporal data effectively, facilitating SOC retrieval and analysis.
 4. **Visualization**: Offer tools to visualize SOC distribution and trends, enabling users to make informed decisions.
 
-## Features
+## Outline & Key Steps
 
 1. **Data Integration**  
    - Aggregate SOC variables, land use types, and crop health indicators from multiple data sources.
