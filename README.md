@@ -50,6 +50,36 @@ This project focuses on predicting **soil organic carbon (SOC)** levels across *
   NRDE (Normalized Red-Edge Difference Index)
   BI (Bare Soil Index)
 
+
+## Possible Features
+Soil Organic Carbon (SOC)
+Soil pH
+Soil Texture (sand, silt, clay proportions)
+Bulk Density
+Carbon/Nitrogen Ratio
+Nutrient Levels (e.g., nitrogen, phosphorus, potassium)
+Land Use Type
+Land Cover
+Elevation and Slope
+Soil Depth
+Soil Moisture
+Soil Carbon Content by Depth Layers
+Climate Zone
+Land Management Practices (e.g., crop rotation, tillage)
+Soil Erosion Rates
+Cation Exchange Capacity (CEC)
+Available Water Content
+Temperature (mean, minimum, maximum)
+Precipitation (total, seasonal)
+Solar Radiation
+Evapotranspiration
+Land Cover Type Change
+Crop Type and Health
+NRVI (Normalized Red-Edge Vegetation Index)
+EVI (Enhanced Vegetation Index)
+NRDE (Normalized Red-Edge Difference Index)
+BI (Bare Soil Index)
+
 ## Usage
 
 1. **Data Preparation**: Run preprocessing scripts to standardize data formats.
