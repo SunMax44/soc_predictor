@@ -1,4 +1,4 @@
-# SOC Predictor
+# Humus Predictor
 
 This project focuses on predicting **soil organic carbon (SOC)** levels across **Germany** to contribute to current efficiency vs. effectiveness tradeoffs by making SOC modeling both more efficient and effective. By modeling SOC in relation to **land use type, crop health, and location**, the project aims to inform sustainable land management practices that can enhance carbon sequestration in soils, thereby yielding positive aspects such as **increasing soil fertility, reducing atmospheric CO₂ levels and increasing soil water retention**. With soils being a significant carbon sink, accurately estimating SOC levels is essential for climate action. This project uses various land use, crop type, and soil health indicators to model SOC levels and examine changes over time using Machine Learning algorithm.
 
