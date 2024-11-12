@@ -9,8 +9,8 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 # Initialize Earth Engine with service account credentials
-SERVICE_ACCOUNT = 'soil-project-admin@ee-maxsonntag4.iam.gserviceaccount.com'
-KEY_PATH = 'key_soc_project.json'  # Adjust this path to the JSON key file location
+SERVICE_ACCOUNT = 'soil-project@ee-maxsonntag4.iam.gserviceaccount.com'
+KEY_PATH = '/Users/maxsonntag/Desktop/json_key_soil_project.json'
 EE_CREDENTIALS = ee.ServiceAccountCredentials(SERVICE_ACCOUNT, KEY_PATH)
 ee.Initialize(EE_CREDENTIALS)
 
