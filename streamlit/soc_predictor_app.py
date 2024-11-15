@@ -5,11 +5,19 @@ import ee
 import pickle
 from datetime import datetime, timedelta
 import os
+import json
 
 # Initialize Earth Engine with service account credentials
-SERVICE_ACCOUNT="soil-project@ee-maxsonntag4.iam.gserviceaccount.com"
-KEY_PATH="/Users/maxsonntag/Desktop/jsonkey_soil_project.json"
-EE_CREDENTIALS = ee.ServiceAccountCredentials(SERVICE_ACCOUNT, KEY_PATH)
+# Get GEE credentials from Streamlit secrets
+SERVICE_ACCOUNT = st.secrets["GEE_SERVICE_ACCOUNT"]
+GEE_CREDENTIALS = json.loads(st.secrets["GEE_CREDENTIALS_JSON"])
+
+# Write the credentials to a temporary file
+with open("temp-gee-key.json", "w") as key_file:
+    json.dump(GEE_CREDENTIALS, key_file)
+
+# Initialize Earth Engine
+EE_CREDENTIALS = ee.ServiceAccountCredentials(SERVICE_ACCOUNT, "temp-gee-key.json")
 ee.Initialize(EE_CREDENTIALS)
 
 # Load the trained model
