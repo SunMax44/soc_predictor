@@ -8,16 +8,15 @@ import os
 import json
 
 # Initialize Earth Engine with service account credentials
-# Get GEE credentials from Streamlit secrets
-SERVICE_ACCOUNT = st.secrets["GEE_SERVICE_ACCOUNT"]
+# Retrieve the JSON key from secrets
 GEE_CREDENTIALS = json.loads(st.secrets["GEE_CREDENTIALS_JSON"])
 
-# Write the credentials to a temporary file
+# Write the JSON to a temporary file
 with open("temp-gee-key.json", "w") as key_file:
     json.dump(GEE_CREDENTIALS, key_file)
 
 # Initialize Earth Engine
-EE_CREDENTIALS = ee.ServiceAccountCredentials(SERVICE_ACCOUNT, "temp-gee-key.json")
+EE_CREDENTIALS = ee.ServiceAccountCredentials(GEE_CREDENTIALS["client_email"], "temp-gee-key.json")
 ee.Initialize(EE_CREDENTIALS)
 
 # Load the trained model
