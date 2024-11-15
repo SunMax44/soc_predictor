@@ -4,10 +4,11 @@ import numpy as np
 import ee
 import pickle
 from datetime import datetime, timedelta
+import os
 
 # Initialize Earth Engine with service account credentials
-SERVICE_ACCOUNT = 'soil-project@ee-maxsonntag4.iam.gserviceaccount.com'
-KEY_PATH = '/Users/maxsonntag/Desktop/jsonkey_soil_project.json'
+SERVICE_ACCOUNT="soil-project@ee-maxsonntag4.iam.gserviceaccount.com"
+KEY_PATH="/Users/maxsonntag/Desktop/jsonkey_soil_project.json"
 EE_CREDENTIALS = ee.ServiceAccountCredentials(SERVICE_ACCOUNT, KEY_PATH)
 ee.Initialize(EE_CREDENTIALS)
 
@@ -91,7 +92,7 @@ def fetch_quarterly_simple_indices(lat, lon, cloud_threshold=80):
     return df, stats
 
 # Streamlit app for user input and data fetching
-st.title("Quarterly Vegetation Indices and SOCI with Landsat 8 Cloud Masking")
+st.title("SOC predictor using dynamically retrieved satellite image indices")
 
 lat = st.number_input("Latitude", format="%.6f", value=54.8599)
 lon = st.number_input("Longitude", format="%.6f", value=8.4114)
