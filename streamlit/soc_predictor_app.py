@@ -20,7 +20,7 @@ EE_CREDENTIALS = ee.ServiceAccountCredentials(GEE_CREDENTIALS["client_email"], "
 ee.Initialize(EE_CREDENTIALS)
 
 # Load the trained model
-with open("data/tuned_lightgbm_model.pkl", "rb") as model_file:
+with open("ml_model/tuned_lightgbm_model.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
 # Load frequency and mean encodings for 'main_vegetation_type'
