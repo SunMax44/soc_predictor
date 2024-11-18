@@ -5,16 +5,35 @@ st.title("SOC Predictor")
 
 st.markdown("""
     <style>
-        body {
-            background-color: #f5f2e3;  /* Soft Yellow */
-            color: #4b371c;  /* Soil Brown */
+        /* Change the overall background */
+        .stApp {
+            background-color: #f5f2e3; /* Soft Yellow */
         }
+
+        /* Change text color across the app */
+        html, body, [class*="css"] {
+            color: #4b371c; /* Soil Brown */
+            font-family: "Arial", sans-serif;
+        }
+
+        /* Style the sidebar */
+        .css-1d391kg { 
+            background-color: #e0d4b4; /* Light Brown */
+        }
+
+        /* Style buttons */
         .stButton>button {
-            background-color: #f7c800;  /* Corn Yellow */
-            color: #4b371c;  /* Soil Text */
+            background-color: #f7c800; /* Corn Yellow */
+            color: #4b371c; /* Soil Brown */
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .stButton>button:hover {
+            background-color: #f9e600; /* Lighter Yellow */
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 
 import json
