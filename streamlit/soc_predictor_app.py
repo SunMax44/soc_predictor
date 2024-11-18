@@ -1,10 +1,19 @@
-# Streamlit Page Configuration
+import streamlit as st
+
+# Streamlit Page Configuration (MUST BE AT THE TOP)
 st.set_page_config(
     page_title="SOC Predictor",
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+import pandas as pd
+import numpy as np
+import ee
+import pickle
+from datetime import datetime, timedelta
+import os
 
 # CSS for Custom Design
 st.markdown("""
