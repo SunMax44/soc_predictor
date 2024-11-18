@@ -16,6 +16,12 @@ with open("temp-gee-key.json", "w") as key_file:
 EE_CREDENTIALS = ee.ServiceAccountCredentials(GEE_CREDENTIALS["client_email"], "temp-gee-key.json")
 ee.Initialize(EE_CREDENTIALS)
 
+import pickle
+
+# Load the trained model
+with open("ml_model/tuned_lightgbm_model.pkl", "rb") as model_file:
+    model = pickle.load(model_file)
+
 
 # Add basic inputs
 lat = st.number_input("Latitude", format="%.6f", value=54.8599)
