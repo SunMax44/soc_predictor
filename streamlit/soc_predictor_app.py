@@ -24,8 +24,8 @@ with open("ml_model/tuned_lightgbm_model.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
 # Load frequency and mean encodings for 'main_vegetation_type'
-freq_encoding = np.load("main_vegetation_type_freq_encoding.npy", allow_pickle=True).item()
-mean_encoding = np.load("main_vegetation_type_mean_encoding.npy", allow_pickle=True).item()
+freq_encoding = np.load("streamlit/main_vegetation_type_freq_encoding.npy", allow_pickle=True).item()
+mean_encoding = np.load("streamlit/main_vegetation_type_mean_encoding.npy", allow_pickle=True).item()
 
 # Function to mask clouds in Landsat images
 def mask_clouds_landsat(image):
