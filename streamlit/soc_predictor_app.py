@@ -8,3 +8,8 @@ lat = st.number_input("Latitude", format="%.6f", value=54.8599)
 lon = st.number_input("Longitude", format="%.6f", value=8.4114)
 
 st.write("Enter your latitude and longitude above.")
+
+with st.sidebar:
+    st.header("Input Details")
+    st.number_input("Elevation (meters)", format="%.1f", value=50.0)
+
