@@ -7,8 +7,44 @@ from datetime import datetime, timedelta
 import os
 import json
 
+# Streamlit Page Configuration
+st.set_page_config(
+    page_title="SOC Predictor",
+    page_icon="🌾",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# CSS for Custom Design
+st.markdown("""
+    <style>
+        /* Background and Font Colors */
+        body {
+            background-color: #f5f2e3;  /* Soft Yellow */
+            color: #4b371c;  /* Soil Brown */
+        }
+        .stButton>button {
+            background-color: #81c784;  /* Light Green */
+            color: white;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+        .stButton>button:hover {
+            background-color: #66bb6a;  /* Darker Green */
+        }
+        .stNumberInput label, .stSelectbox label {
+            font-weight: bold;
+        }
+        .stMarkdown {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# App Title with Icon
+st.title("🌾 Soil Organic Carbon Predictor")
+
 # Initialize Earth Engine with service account credentials
-# Retrieve the JSON key from secrets
 GEE_CREDENTIALS = json.loads(st.secrets["GEE_CREDENTIALS_JSON"])
 
 # Write the JSON to a temporary file
@@ -98,25 +134,25 @@ def fetch_quarterly_simple_indices(lat, lon, cloud_threshold=80):
     
     return df, stats
 
-# Streamlit app for user input and data fetching
-st.title("SOC predictor using dynamically retrieved satellite image indices")
+# Sidebar for Input Section
+with st.sidebar:
+    st.header("Input Details")
+    lat = st.number_input("Latitude (°)", format="%.6f", value=54.8599)
+    lon = st.number_input("Longitude (°)", format="%.6f", value=8.4114)
+    elevation = st.number_input("Elevation (meters)", format="%.1f", value=50.0, help="Enter elevation if known.")
+    
+    st.markdown("### Soil Composition")
+    sand = st.number_input("Sand (%)", min_value=0, max_value=100, step=1)
+    silt = st.number_input("Silt (%)", min_value=0, max_value=100, step=1)
+    clay = st.number_input("Clay (%)", min_value=0, max_value=100, step=1)
 
-lat = st.number_input("Latitude", format="%.6f", value=54.8599)
-lon = st.number_input("Longitude", format="%.6f", value=8.4114)
-elevation = st.number_input("Elevation (meters)", format="%.1f", value=50.0, help="Enter elevation if known to avoid retrieval errors.")
-
-# Soil composition inputs
-sand = st.number_input("Sand percentage", min_value=0, max_value=100, step=1)
-silt = st.number_input("Silt percentage", min_value=0, max_value=100, step=1)
-clay = st.number_input("Clay percentage", min_value=0, max_value=100, step=1)
-
-# Validate that percentages add up to 100
+# Validation Message
 if sand + silt + clay != 100:
-    st.warning("Sand, silt, and clay percentages must add up to 100%.")
+    st.warning("⚠️ Sand, silt, and clay percentages must total 100%.")
 else:
-    # Dropdown options for categorical columns
+    st.markdown("### Land Cover Details")
     main_vegetation_type_values = list(freq_encoding.keys())
-    land_cover_type_values = ["Cropland", "Grassland", "Woodland", "Bareland", "Shrubland"]  # Replace with actual land cover options
+    land_cover_type_values = ["Cropland", "Grassland", "Woodland", "Bareland", "Shrubland"]
     
     selected_main_vegetation_type = st.selectbox("Select Main Vegetation Type", options=main_vegetation_type_values)
     selected_land_cover_type = st.selectbox("Select Land Cover Type", options=land_cover_type_values)
@@ -127,9 +163,8 @@ else:
         if not df.empty:
             st.success("Data fetched successfully!")
             
-            # Prepare data for the model prediction
             model_input_data = {
-                'lat': lat,  # Add latitude
+                'lat': lat,
                 'long': lon, 
                 'elevation': elevation,
                 'sand': sand,
@@ -138,18 +173,14 @@ else:
                 **index_stats
             }
             
-            # Apply frequency and target encodings for main_vegetation_type
             model_input_data['main_vegetation_type_freq_encoded'] = freq_encoding.get(selected_main_vegetation_type, 0)
             model_input_data['main_vegetation_type_target_encoded'] = mean_encoding.get(selected_main_vegetation_type, 0)
             
-            # One-hot encode land_cover_type
             for cover_type in land_cover_type_values:
                 model_input_data[f'land_cover_type_{cover_type}'] = int(selected_land_cover_type == cover_type)
             
-            # Convert to DataFrame for prediction
             input_df = pd.DataFrame([model_input_data])
-            # Predict and round the output to two decimal places
             prediction = round(model.predict(input_df)[0], 2)
 
-            # Display the result with a percentage symbol
-            st.write("SOC Prediction:", prediction, "%")
+            st.write("### SOC Prediction:")
+            st.success(f"{prediction}%")
