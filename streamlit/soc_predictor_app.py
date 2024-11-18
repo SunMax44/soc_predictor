@@ -3,6 +3,20 @@ import streamlit as st
 st.set_page_config(page_title="SOC Predictor", layout="wide")
 st.title("SOC Predictor")
 
+import json
+import ee
+
+# Initialize Earth Engine with service account credentials
+GEE_CREDENTIALS = json.loads(st.secrets["GEE_CREDENTIALS_JSON"])
+
+# Write the JSON to a temporary file
+with open("temp-gee-key.json", "w") as key_file:
+    json.dump(GEE_CREDENTIALS, key_file)
+
+EE_CREDENTIALS = ee.ServiceAccountCredentials(GEE_CREDENTIALS["client_email"], "temp-gee-key.json")
+ee.Initialize(EE_CREDENTIALS)
+
+
 # Add basic inputs
 lat = st.number_input("Latitude", format="%.6f", value=54.8599)
 lon = st.number_input("Longitude", format="%.6f", value=8.4114)
