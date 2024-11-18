@@ -9,8 +9,8 @@ import json
 # Streamlit Page Configuration
 st.set_page_config(
     page_title="SOC Predictor",
-    page_icon="🌾",
-    layout="wide"
+    layout="wide",
+    page_icon="🌾"
 )
 
 # Add custom CSS
@@ -19,12 +19,7 @@ st.markdown("""
         /* Main App Background (Dark Brown) */
         .stApp {
             background-color: #4a2c2a; /* Chocolate Brown */
-            color: #e0d4b4; /* Sidebar Font Color for Main Text */
-        }
-
-        /* Sidebar Background (Light Brown) */
-        section[data-testid="stSidebar"] {
-            background-color: #e0d4b4; /* Light Brown */
+            color: #e0d4b4; /* Light Brown for Text */
         }
 
         /* Buttons (Green) */
@@ -41,12 +36,12 @@ st.markdown("""
 
         /* Input Field Text Color */
         .stTextInput, .stNumberInput, .stSelectbox {
-            color: #e0d4b4; /* Sidebar Font Color */
+            color: #e0d4b4; /* Light Brown for Input Text */
         }
 
         /* Header and Markdown Text */
         div[data-testid="stMarkdownContainer"] {
-            color: #e0d4b4; /* Sidebar Font Color */
+            color: #e0d4b4; /* Light Brown for Text */
         }
     </style>
 """, unsafe_allow_html=True)
@@ -54,23 +49,23 @@ st.markdown("""
 # App Title
 st.title("🌾 Soil Organic Carbon Predictor")
 
-# Sidebar Inputs
-with st.sidebar:
-    st.header("Input Details")
-    lat = st.number_input("Latitude", format="%.6f", value=54.8599)
-    lon = st.number_input("Longitude", format="%.6f", value=8.4114)
-    elevation = st.number_input("Elevation (meters)", format="%.1f", value=50.0, help="Enter elevation if known.")
-    sand = st.number_input("Sand (%)", min_value=0, max_value=100, step=1)
-    silt = st.number_input("Silt (%)", min_value=0, max_value=100, step=1)
-    clay = st.number_input("Clay (%)", min_value=0, max_value=100, step=1)
+# Input Section
+st.header("Input Details")
+lat = st.number_input("Latitude", format="%.6f", value=54.8599)
+lon = st.number_input("Longitude", format="%.6f", value=8.4114)
+elevation = st.number_input("Elevation (meters)", format="%.1f", value=50.0, help="Enter elevation if known.")
+sand = st.number_input("Sand (%)", min_value=0, max_value=100, step=1)
+silt = st.number_input("Silt (%)", min_value=0, max_value=100, step=1)
+clay = st.number_input("Clay (%)", min_value=0, max_value=100, step=1)
 
-    # Validation
-    if sand + silt + clay != 100:
-        st.warning("⚠️ Sand, silt, and clay percentages must total 100%.")
-    else:
-        st.success("Valid soil composition!")
+# Validate Soil Composition
+if sand + silt + clay != 100:
+    st.warning("⚠️ Sand, silt, and clay percentages must total 100%.")
+else:
+    st.success("Valid soil composition!")
 
 # Dropdown Inputs for Vegetation and Land Cover
+st.header("Land Cover Details")
 main_vegetation_type_values = ["Forest", "Grassland", "Cropland"]
 land_cover_type_values = ["Shrubland", "Bareland", "Woodland"]
 selected_main_vegetation_type = st.selectbox("Select Main Vegetation Type", options=main_vegetation_type_values)
@@ -92,7 +87,7 @@ def fetch_quarterly_simple_indices(lat, lon):
     # Example simplified data for testing
     return {"NDVI_mean": 0.5, "NDMI_mean": 0.3, "BSI_mean": -0.2, "SOCI_mean": 0.1}
 
-# Predict Button
+# Prediction Button
 if st.button("Fetch Data and Predict"):
     # Fetch indices
     stats = fetch_quarterly_simple_indices(lat, lon)
