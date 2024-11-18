@@ -3,6 +3,20 @@ import streamlit as st
 st.set_page_config(page_title="SOC Predictor", layout="wide")
 st.title("SOC Predictor")
 
+st.markdown("""
+    <style>
+        body {
+            background-color: #f5f2e3;  /* Soft Yellow */
+            color: #4b371c;  /* Soil Brown */
+        }
+        .stButton>button {
+            background-color: #f7c800;  /* Corn Yellow */
+            color: #4b371c;  /* Soil Text */
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+
 import json
 import ee
 
