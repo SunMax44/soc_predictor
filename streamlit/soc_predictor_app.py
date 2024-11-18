@@ -22,6 +22,10 @@ import pickle
 with open("ml_model/tuned_lightgbm_model.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
+def fetch_quarterly_simple_indices(lat, lon):
+    # (Simplify the logic for now to ensure this runs)
+    return {"NDVI_mean": 0.5, "NDMI_mean": 0.3, "BSI_mean": -0.2, "SOCI_mean": 0.1}
+
 
 # Add basic inputs
 lat = st.number_input("Latitude", format="%.6f", value=54.8599)
@@ -53,5 +57,30 @@ if sand + silt + clay != 100:
     st.warning("Sand, silt, and clay percentages must add up to 100%.")
 else:
     st.success("Valid soil composition!")
+
+if st.button("Fetch Data and Predict"):
+    # Fetch data (mocked for now)
+    stats = fetch_quarterly_simple_indices(lat, lon)
+
+    # Prepare input for prediction
+    model_input_data = {
+        "lat": lat,
+        "long": lon,
+        "sand": sand,
+        "silt": silt,
+        "clay": clay,
+        **stats,
+    }
+
+    # Example encoding for dropdowns
+    model_input_data["main_vegetation_type_encoded"] = 0  # Mock encoding
+    model_input_data["land_cover_type_encoded"] = 1  # Mock encoding
+
+    input_df = pd.DataFrame([model_input_data])
+
+    # Perform prediction (mocked for now)
+    prediction = model.predict(input_df)[0]
+    st.success(f"Predicted SOC: {prediction:.2f}%")
+
 
 
