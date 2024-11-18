@@ -1,12 +1,3 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import ee
-import pickle
-from datetime import datetime, timedelta
-import os
-import json
-
 # Streamlit Page Configuration
 st.set_page_config(
     page_title="SOC Predictor",
@@ -20,23 +11,51 @@ st.markdown("""
     <style>
         /* Background and Font Colors */
         body {
-            background-color: #f5f2e3;  /* Soft Yellow */
-            color: #4b371c;  /* Soil Brown */
+            background-color: #f5f2e3;  /* Soft Yellow for Background */
+            color: #4b371c;  /* Soil Brown for text */
         }
+        
+        /* Header Text (Title and Section Titles) */
+        .css-1v0mbdj {
+            color: #4b371c;  /* Soil Brown for Titles */
+        }
+        
         .stButton>button {
-            background-color: #81c784;  /* Light Green */
-            color: white;
+            background-color: #f7c800;  /* Corn Yellow for Button */
+            color: #4b371c;  /* Dark Brown Text for button */
             border-radius: 10px;
             padding: 10px 20px;
+            font-weight: bold;
         }
         .stButton>button:hover {
-            background-color: #66bb6a;  /* Darker Green */
+            background-color: #f9e600;  /* Lighter Corn Yellow for hover */
         }
+
+        /* Input Fields Styling */
+        .stNumberInput, .stSelectbox {
+            background-color: #fff3e0;  /* Light Yellow for Input Background */
+            color: #4b371c;  /* Soil Brown for text */
+            border: 2px solid #f7c800;  /* Corn Yellow Border */
+        }
+
         .stNumberInput label, .stSelectbox label {
             font-weight: bold;
         }
-        .stMarkdown {
-            font-family: Arial, sans-serif;
+
+        /* Sidebar Styling */
+        .css-1d391kg {
+            background-color: #e0d4b4;  /* Soft Brown for Sidebar */
+            color: #4b371c;
+        }
+
+        /* Success/Warning/Information text colors */
+        .stSuccess {
+            color: #4b371c;
+            background-color: #f7c800;  /* Corn Yellow */
+        }
+        .stWarning {
+            color: #4b371c;
+            background-color: #ffec99;  /* Light yellow warning */
         }
     </style>
 """, unsafe_allow_html=True)
@@ -174,13 +193,4 @@ else:
             }
             
             model_input_data['main_vegetation_type_freq_encoded'] = freq_encoding.get(selected_main_vegetation_type, 0)
-            model_input_data['main_vegetation_type_target_encoded'] = mean_encoding.get(selected_main_vegetation_type, 0)
-            
-            for cover_type in land_cover_type_values:
-                model_input_data[f'land_cover_type_{cover_type}'] = int(selected_land_cover_type == cover_type)
-            
-            input_df = pd.DataFrame([model_input_data])
-            prediction = round(model.predict(input_df)[0], 2)
-
-            st.write("### SOC Prediction:")
-            st.success(f"{prediction}%")
+            model
