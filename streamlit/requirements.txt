@@ -3,3 +3,4 @@ pandas
 numpy
 earthengine-api
 scikit-learn
+lightgbm
