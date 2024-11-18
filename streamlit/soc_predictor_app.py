@@ -64,10 +64,15 @@ if sand + silt + clay != 100:
 else:
     st.success("Valid soil composition!")
 
+# Load Encoding Files
+freq_encoding = np.load("streamlit/main_vegetation_type_freq_encoding.npy", allow_pickle=True).item()
+mean_encoding = np.load("streamlit/main_vegetation_type_mean_encoding.npy", allow_pickle=True).item()
+
 # Dropdown Inputs for Vegetation and Land Cover
 st.header("Land Cover Details")
-main_vegetation_type_values = ["Forest", "Grassland", "Cropland"]
-land_cover_type_values = ["Shrubland", "Bareland", "Woodland"]
+main_vegetation_type_values = list(freq_encoding.keys())
+land_cover_type_values = ["Cropland", "Grassland", "Woodland", "Bareland", "Shrubland"]
+
 selected_main_vegetation_type = st.selectbox("Select Main Vegetation Type", options=main_vegetation_type_values)
 selected_land_cover_type = st.selectbox("Select Land Cover Type", options=land_cover_type_values)
 
@@ -102,9 +107,14 @@ if st.button("Fetch Data and Predict"):
         "clay": clay,
         **stats,
     }
-    # Example encoding
-    model_input_data["main_vegetation_type_encoded"] = 0  # Mock encoding
-    model_input_data["land_cover_type_encoded"] = 1  # Mock encoding
+
+    # Add encodings for vegetation type
+    model_input_data["main_vegetation_type_freq_encoded"] = freq_encoding.get(selected_main_vegetation_type, 0)
+    model_input_data["main_vegetation_type_target_encoded"] = mean_encoding.get(selected_main_vegetation_type, 0)
+
+    # One-hot encode land cover type
+    for cover_type in land_cover_type_values:
+        model_input_data[f"land_cover_type_{cover_type}"] = int(selected_land_cover_type == cover_type)
 
     # Convert to DataFrame for prediction
     input_df = pd.DataFrame([model_input_data])
