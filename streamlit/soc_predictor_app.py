@@ -23,7 +23,7 @@ st.markdown("""
         }
 
         /* Buttons (Green) */
-        .stButton>button {
+        .stButton>button div p {
             background-color: #81c784; /* Green */
             color: #4a2c2a; /* Brown Font Color */
             border-radius: 10px;
