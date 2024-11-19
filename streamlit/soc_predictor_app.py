@@ -73,8 +73,8 @@ st.header("Land Cover Details")
 main_vegetation_type_values = list(freq_encoding.keys())
 land_cover_type_values = ["Cropland", "Grassland", "Woodland", "Bareland", "Shrubland"]
 
-selected_main_vegetation_type = st.selectbox("Select Main Vegetation Type", options=main_vegetation_type_values)
 selected_land_cover_type = st.selectbox("Select Land Cover Type", options=land_cover_type_values)
+selected_main_vegetation_type = st.selectbox("Select Main Vegetation Type", options=main_vegetation_type_values)
 
 # Earth Engine Initialization
 GEE_CREDENTIALS = json.loads(st.secrets["GEE_CREDENTIALS_JSON"])
