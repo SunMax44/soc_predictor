@@ -25,7 +25,7 @@ st.markdown("""
         /* Buttons (Green) */
         .stButton>button {
             background-color: #81c784; /* Green */
-            color: white;
+            color: #4a2c2a; /* Brown Font Color */
             border-radius: 10px;
             font-weight: bold;
             padding: 10px 20px;
