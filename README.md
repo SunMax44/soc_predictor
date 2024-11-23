@@ -4,21 +4,23 @@
 
 This project focuses on predicting **field level** **soil organic carbon (SOC)** levels across **Europe** to contribute to current efficiency vs. effectiveness tradeoffs by making SOC modeling both more efficient and effective.
 
-
 Already implemented:
 - Europe-wide SOC modelling
 - EU Lucas 2018 soil sample dataset with location-specific features (soil type, elevation, land use & cover) as well as the model's target (SOC)
 - Landsat-8 OLI data (bands 2-6) to derive indices for vegetation, moisture, bare soil and soil organic carbon (NDVI, NDMI, BSI, SOCI)
-- LightGBM model was chosen for its better performance (e.g. over RandomForest, XGBoost, etc.)
-- Hyperparameter Tuning
-- MSE: 1.94
-- R^2 Score: 0.476
+- ML models and concepts tried: LightGBM, RandomForest, XGBoost, PCA, VIF
+- Best results for LightGBM and RandomForest with Hyperparamter tuning (MSE 1.9-2.1 & R^2 Score 45-48%)
 
 Next steps:
 - Model evaluation with different soil sampling data
 - Implementation of climate data (temperature & precipitation) additional features
 - Add models to predict other soil properties (e.g. bulk density or cation exchange capacity): Connecting the current feature dataset to soilgrids using SOC and other features
 
+Streamlit application:
+https://socprediciton.streamlit.app/
+
+Project presentation:
+https://docs.google.com/presentation/d/1ZTKQqSLrSee2AyywCgwp_g5WTfcB09SPnVIRHpJ7Km8/edit?usp=sharing
 
 ### Background
 By modeling SOC in relation to **land use type, crop health, and location**, the project aims to inform sustainable land management practices that can enhance carbon sequestration in soils, thereby yielding positive aspects such as **increasing soil fertility, reducing atmospheric CO₂ levels and increasing soil water retention**. With soils being a significant carbon sink, accurately estimating SOC levels is essential for climate action.
