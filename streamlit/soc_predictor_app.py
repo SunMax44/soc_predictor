@@ -121,4 +121,4 @@ if st.button("Fetch Data and Predict"):
 
     # Perform prediction
     prediction = model.predict(input_df)[0]
-    st.success(f"Predicted SOC: {prediction:.2f}%")
+    st.success(f"Predicted relative SOC topsoil content (0-20cm depth): {prediction:.2f}%")
