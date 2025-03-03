@@ -5,7 +5,7 @@
 This project focuses on predicting **field level** **soil organic carbon (SOC)** levels across **Europe** to contribute to current efficiency vs. effectiveness tradeoffs by making SOC modeling both more efficient and effective.
 
 Already implemented:
-- Europe-wide SOC modelling
+- Europe-wide SOC modelling (top soil: 0-20cm)
 - EU Lucas 2018 soil sample dataset with location-specific features (soil type, elevation, land use & cover) as well as the model's target (SOC)
 - Landsat-8 OLI data (bands 2-6) to derive indices for vegetation, moisture, bare soil and soil organic carbon (NDVI, NDMI, BSI, SOCI)
 - ML models and concepts tried: LightGBM, RandomForest, XGBoost, PCA, VIF
